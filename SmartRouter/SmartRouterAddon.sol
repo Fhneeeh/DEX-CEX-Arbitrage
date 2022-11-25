@@ -247,7 +247,7 @@ contract smartRouterAddon {
 
         else {
 
-
+            executeSecondOption(tokenFrom, tokenIntermediary, tokenTo, routersIndirect0, poolsIndirect0, routersIndirect1, poolsIndirect1, inputAmount);
 
         }
 
