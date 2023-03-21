@@ -13,7 +13,7 @@ contract KyberStaticQuoter is IUniswapV3StaticQuoter, KyberQuoterCore {
     using SafeCast for uint256;
     using Path for bytes;
 
-    address immutable factory = 0x411b0fAcC3489691f28ad58c47006AF5E3Ab3A28;
+    address immutable factory = 0x5F1dddbf348aC2fbe22a163e30F99F9ECE3DD50a;
 
     function getPool(
         address tokenA,
