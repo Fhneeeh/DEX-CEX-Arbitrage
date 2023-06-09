@@ -218,13 +218,9 @@ contract smartRouterAddon {
 
     address private constant DodoV2Approve = 0x6D310348d5c12009854DFCf72e0DF9027e8cb4f4;
 
-    address private constant AaveV3Pool = 0x794a61358D6845594F94dc1DB02A252b5b4814aD;
-
     address private constant QuickV2Router = 0xa5E0829CaCEd8fFDD4De3c43696c57F7D7A678ff;
 
     address private constant QuickV2Factory = 0x5757371414417b8C6CAad45bAeF941aBc7d3Ab32;
-
-    address private constant UniswapV3MathLibrary = 0x4b3654F5390796dF1d9586047Ea2147212a88582;
 
     address private constant DEXLibraryAddress = 0x7537F9d63e1C7f295832a7455dD6aBDa4b041bdA;
 
