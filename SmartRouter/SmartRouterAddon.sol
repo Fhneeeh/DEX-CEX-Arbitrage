@@ -206,7 +206,7 @@ contract smartRouterAddon {
 
     event amountReceipt(uint[]);
     
-    address private constant Owner = 0xbBcdE02c6c6b5e0aD7D9c34CB1a2786e8F7F5193;
+    address private constant Owner;
 
     address private constant UniV3Router = 0xE592427A0AEce92De3Edee1F18E0157C05861564;
 
@@ -253,7 +253,7 @@ contract smartRouterAddon {
 
     }
 
-    function defineRoute(address tokenFrom, address tokenIntermediary, address[] memory routersDirect, address[] memory poolsDirect,address[] memory routersIndirect0, address[] memory poolsIndirect0,address[] memory routersIndirect1, address[] memory poolsIndirect1, uint inputAmount) public view returns (uint){
+    function defineRoute(address tokenFrom, address tokenIntermediary, address[] memory routersDirect, address[] memory poolsDirect,address[] memory routersIndirect0, address[] memory poolsIndirect0,address[] memory routersIndirect1, address[] memory poolsIndirect1, uint inputAmount) internal view returns (uint){
 
         (,, uint AmountOutDirect) = findBestRoute(tokenFrom, routersDirect, poolsDirect, inputAmount);
 
@@ -271,7 +271,7 @@ contract smartRouterAddon {
 
     }
 
-    function executeFirstOption(address tokenFrom, address tokenTo, address[] memory routers, address[] memory pools, uint inputAmount) public {
+    function executeFirstOption(address tokenFrom, address tokenTo, address[] memory routers, address[] memory pools, uint inputAmount) internal {
 
         ERC20(tokenFrom).transferFrom(msg.sender,address(this),inputAmount);
 
@@ -317,7 +317,7 @@ contract smartRouterAddon {
 
     }
 
-    function executeSecondOption(address tokenFrom, address tokenIntermediary, address tokenTo, address[] memory routersIndirect0, address[] memory poolsIndirect0,address[] memory routersIndirect1, address[] memory poolsIndirect1, uint inputAmount) public {
+    function executeSecondOption(address tokenFrom, address tokenIntermediary, address tokenTo, address[] memory routersIndirect0, address[] memory poolsIndirect0,address[] memory routersIndirect1, address[] memory poolsIndirect1, uint inputAmount) internal {
 
         ERC20(tokenFrom).transferFrom(msg.sender,address(this),inputAmount);
 
@@ -406,7 +406,7 @@ contract smartRouterAddon {
     }
 
 
-    function UniV3Swap(address tokenFrom, address tokenTo, address router, address pool, uint inputAmount) public {
+    function UniV3Swap(address tokenFrom, address tokenTo, address router, address pool, uint inputAmount) internal {
 
         uint24 fee = UniswapV3Pool(pool).fee();
 
@@ -414,13 +414,13 @@ contract smartRouterAddon {
 
     }
 
-    function QuickV3Swap(address tokenFrom, address tokenTo, address router, uint inputAmount) public {
+    function QuickV3Swap(address tokenFrom, address tokenTo, address router, uint inputAmount) internal {
 
         QuickswapV3Router(router).exactInputSingle(QSwapRouter.ExactInputSingleParams(tokenFrom,tokenTo,address(this),block.timestamp + 6000, inputAmount,0,0));
 
     }
 
-    function KyberV3Swap(address tokenFrom, address tokenTo, address router, address pool, uint inputAmount) public {
+    function KyberV3Swap(address tokenFrom, address tokenTo, address router, address pool, uint inputAmount) internal {
 
         uint24 fee = KyberswapV3Pool(pool).swapFeeUnits();
 
@@ -428,7 +428,7 @@ contract smartRouterAddon {
 
     }
 
-    function DODOSwap(address tokenFrom, address tokenTo, address router, address pool, uint inputAmount) public {
+    function DODOSwap(address tokenFrom, address tokenTo, address router, address pool, uint inputAmount) internal {
 
         ERC20(tokenFrom).approve(DodoV2Approve,inputAmount);
 
@@ -444,7 +444,7 @@ contract smartRouterAddon {
 
     }
 
-    function UniV2Swap(address tokenFrom, address tokenTo, address router, uint inputAmount) public {
+    function UniV2Swap(address tokenFrom, address tokenTo, address router, uint inputAmount) internal {
 
         address[] memory path = new address[](2);
         path[0] = tokenFrom;
